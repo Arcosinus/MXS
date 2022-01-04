@@ -1,14 +1,21 @@
-let selectCarte = document.querySelector('.double-face');
+let selectCarte = document.querySelectorAll('.double-face');
 
-selectCarte.addEventListener('click', tournerCarte);
-let carteRetourner = false;
-let carte_selected;
-function tournerCarte() {
-    if(this == carte_selected){
-        this.classList.toggle('face');
-    }
-    if(!carteRetourner){
-        carteRetourner = true;
-        carte_selected = this;
+// let carte_Attribut = document.querySelector('.double-face').getAttribute('data-attr');
+for (let cartes of selectCarte){
+    cartes.addEventListener('click', tournerCarte);
+    let carteRetourner = false;
+    let carte_selected1;
+    let carte_selected2;
+    function tournerCarte() {
+        if(this == carte_selected1){
+            this.classList.toggle('face');
+        }
+        if(!carteRetourner){
+            carteRetourner = true;
+            carte_selected1 = this;
+        }
     }
 }
+
+
+
