@@ -5,6 +5,7 @@ let carteTourner = false;
 let currCard;
 let prevCard;
 let carteChoix = [];
+let carteBon = [];
 
 devoile.forEach(card => card.addEventListener('click', flipCard));
 
@@ -33,12 +34,29 @@ function matchCarte() {
         carteChoix[1].removeEventListener('click', flipCard);
         carteChoix = [];
         carteTourner = false;
+        carteBon++;
+        console.log(carteBon);
+        if (carteBon === 6) {
+            setTimeout( function(){ if (confirm('vous avez gagné !')){
+                window.location.reload(false);
+            } else {
+            }}, 500)
+
+
+
+        }
     } else {
         console.log('pas bon');
         carteChoix.forEach(card => card.classList.remove('face'));
         carteChoix = [];
         carteTourner = false;
+
     }
 }
+
+
+
+
+
 
 
