@@ -197,7 +197,10 @@ let start = document.createElement("button");
 start.innerHTML = "Jouer";
 start.style.width = "64px";
 start.style.height = "64px";
-document.querySelector("body").appendChild(start);
+let graphismeExplain = document.createElement("p");
+graphismeExplain.innerHTML = "Vous pouvez choisir les graphismes en appuyant sur la touche 1 ou 2, la configuration de base est la touche 1.";
+Body.appendChild(start);
+Body.appendChild(graphismeExplain);
 /*Appuyer le bouton lance le jeu*/
 start.addEventListener("click", function(){
     if (start.innerHTML == "Jouer" && choixGraphisme == 1){
