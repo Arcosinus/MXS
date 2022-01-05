@@ -1,4 +1,5 @@
 function preparation(){
+    start.blur();
     start.innerHTML = 'Arrêter';
     /*Préparation du score servant de zone de texte et ajout de la musique*/
     let score = document.querySelector("h3");
