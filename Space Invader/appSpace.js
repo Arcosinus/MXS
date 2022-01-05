@@ -1,4 +1,5 @@
 function preparation(){
+    start.innerHTML = 'Arrêter';
     /*Reset du score servant de zone de texte et emplacement pour dissimuler la musique*/
     let score = document.querySelector("h3");
     score.innerHTML = 'Score : <embed src="fond.mp3" hidden=true autostart=true loop=true mastersound>'
@@ -28,14 +29,15 @@ function preparation(){
     let Droite = true;
     let Gauche = 0;
     /*Lancement d'un tour de jeu*/
-    play(game,Droite,Gauche)
+    play(game,Droite,Gauche);
 }
 function play(game,Droite,Gauche) {
     setTimeout(function(){
-        /*Disparition des explosions après un tour*/
+        /*Rechargement du laser utilisé en ligne 238*/
         if (tir == false){
             tir = true;
         }
+        /*Disparition des explosions après un tour*/
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L" + i + "C" + j);
@@ -44,7 +46,7 @@ function play(game,Droite,Gauche) {
                 }
             }
         }
-        /*Vérification du nombre d'ennemi sur le terrain, utilisé à la ligne 149*/
+        /*Vérification du nombre d'ennemi sur le terrain, utilisé à la ligne 152*/
         let AlienNumber = 0;
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
@@ -148,15 +150,14 @@ function play(game,Droite,Gauche) {
         if (!game){
             let score = document.querySelector("h3");
             score.innerHTML = 'Vous avez perdu !'
+            /*Fin du jeu par victoire du jeu, en lien avec le code pour vérifier le nombre d'ennemis ligne 40*/
+            if (AlienNumber == 0){
+                score.innerHTML = 'Vous avez gagné !'
+            }
         }
         /*Poursuite du jeu*/
         else if (game){
             play(game,Droite,Gauche)
-        }
-        /*Fin du jeu par victoire du jeu, en lien avec le code pour vérifier le nombre d'ennemis ligne 40*/
-        else if (AlienNumber == 0){
-            let score = document.querySelector("h3");
-            score.innerHTML = 'Vous avez gagné !'
         }
     }, 1000)
 }
@@ -167,8 +168,16 @@ let input = document.createElement("input");
 start.innerHTML = "Jouer";
 document.querySelector("body").appendChild(start);
 document.querySelector("body").appendChild(input);
-start.addEventListener("click", preparation)
+/*Appuyer le bouton lance le jeu*/
+start.addEventListener("click", function(){
+    if (start.innerHTML == "Jouer"){
+        preparation();
+    } else {
+        window.location.reload(false);
+    }
+});
 input.addEventListener("keydown", function(event){
+    /*Appuyer sur gauche ou Q pour allez à gauche*/
     if (event.code == 'ArrowLeft' || event.code == "KeyQ"){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
@@ -184,6 +193,7 @@ input.addEventListener("keydown", function(event){
             }
         }
     }
+    /*Appuyer sur droite ou D pour allez à droite*/
     if (event.code == 'ArrowRight' || event.code == "KeyD"){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
@@ -199,6 +209,7 @@ input.addEventListener("keydown", function(event){
             }
         }
     }
+    /*Appuyer sur haut ou Z pour approcher les ennemis*/
     if (event.code == 'ArrowUp' || event.code == "KeyZ"){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
@@ -214,6 +225,7 @@ input.addEventListener("keydown", function(event){
             }
         }
     }
+    /*Appuyer sur bas ou S pour revenir sur la ligne initiale*/
     if (event.code == 'ArrowDown' || event.code == "KeyS"){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
@@ -229,7 +241,7 @@ input.addEventListener("keydown", function(event){
             }
         }
     }
-    /*Appuyer sur espace permet de tirer*/
+    /*Appuyer sur espace permet de tirer et décharge le laser, utilisé en ligne 50*/
     if (event.code == 'Space'){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
@@ -248,4 +260,3 @@ input.addEventListener("keydown", function(event){
         }
     }
 })
-
