@@ -16,10 +16,10 @@ function preparation(){
             colonne.className = "void";
             colonne.id = "L" + i + "C" + j;
             if (i < 3 && j < 12) {
-                colonne.className = "alien";
+                colonne.className = "alien"+graphisme;
             }
             if (i == 15 && j == 8) {
-                colonne.className = "tireur";
+                colonne.className = "tireur"+graphisme;
             }
             ligne.appendChild(colonne);
         }
@@ -41,7 +41,7 @@ function play(game,Droite,Gauche) {
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L" + i + "C" + j);
-                if (cellule.className == "boom"){
+                if (cellule.className == "boom"+graphisme){
                     cellule.className = "void";
                 }
             }
@@ -50,12 +50,12 @@ function play(game,Droite,Gauche) {
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L"+i+"C"+j);
-                if (cellule.className == "laser" && i-1 != -1){
+                if (cellule.className == "laser"+graphisme && i-1 != -1){
                     let celluleSuivante = document.getElementById("L"+(i-1)+"C"+j)
-                    if (celluleSuivante.className == "alien"){
-                        celluleSuivante.className = "boom";
+                    if (celluleSuivante.className == "alien"+graphisme){
+                        celluleSuivante.className = "boom"+graphisme;
                     } else if (celluleSuivante.className == "void"){
-                        celluleSuivante.className = "laser"
+                        celluleSuivante.className = "laser+graphisme"
                     }
                     cellule.className = "void";
                 }
@@ -73,15 +73,15 @@ function play(game,Droite,Gauche) {
         if (Droite && Gauche < 5){
             for (let j = 15; j >= 0; j--) {
                 let cellule = document.getElementById("L"+i+"C"+j);
-                if (cellule.className == "alien"){
+                if (cellule.className == "alien"+graphisme){
                     celluleSuivante = document.getElementById("L"+i+"C"+(j+1));
                     if (j+1 != 16) {
-                        if (celluleSuivante.className == "tireur") {
+                        if (celluleSuivante.className == "tireur"+graphisme) {
                             game = false;
-                        } else if (celluleSuivante.className == "laser") {
-                            celluleSuivante.className = "boom";
+                        } else if (celluleSuivante.className == "laser"+graphisme) {
+                            celluleSuivante.className = "boom"+graphisme;
                         } else {
-                            celluleSuivante.className = "alien";
+                            celluleSuivante.className = "alien"+graphisme;
                         }
                         cellule.className = "void";
                     }
@@ -92,15 +92,15 @@ function play(game,Droite,Gauche) {
         else if (!Droite && Gauche > 0) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L"+i+"C"+j);
-                if (cellule.className == "alien"){
+                if (cellule.className == "alien"+graphisme){
                     let celluleSuivante = document.getElementById("L"+i+"C"+(j-1));
                     if (j-1 != -1) {
-                        if (celluleSuivante.className == "tireur") {
+                        if (celluleSuivante.className == "tireur"+graphisme) {
                             game = false;
-                        } else if (celluleSuivante.className == "laser"){
-                            celluleSuivante.className = "boom";
+                        } else if (celluleSuivante.className == "laser"+graphisme){
+                            celluleSuivante.className = "boom"+graphisme;
                         } else {
-                            celluleSuivante.className = "alien";
+                            celluleSuivante.className = "alien"+graphisme;
                         }
                         cellule.className = "void";
                     }
@@ -114,13 +114,13 @@ function play(game,Droite,Gauche) {
             for (let l = 15; l >= 0; l--) {
                 cellule = document.getElementById("L" + k + "C" + l);
                 let celluleSuivante = document.getElementById("L" + (k+1) + "C" + l);
-                if (cellule.className == "alien") {
-                    if (celluleSuivante.className == "tireur"){
+                if (cellule.className == "alien"+graphisme) {
+                    if (celluleSuivante.className == "tireur"+graphisme){
                         game=false;
-                    } else if (celluleSuivante.className == "laser"){
-                        celluleSuivante.className = "boom";
+                    } else if (celluleSuivante.className == "laser"+graphisme){
+                        celluleSuivante.className = "boom"+graphisme;
                     } else {
-                        celluleSuivante.className = "alien";
+                        celluleSuivante.className = "alien"+graphisme;
                     }
                     cellule.className = "void";
                 }
@@ -135,13 +135,13 @@ function play(game,Droite,Gauche) {
             for (let l = 15; l >= 0; l--) {
                 let cellule = document.getElementById("L" + k + "C" + l);
                 let celluleSuivante = document.getElementById("L" + (k + 1) + "C" + l);
-                if (cellule.className == "alien") {
-                    if (celluleSuivante.className == "tireur"){
+                if (cellule.className == "alien"+graphisme) {
+                    if (celluleSuivante.className == "tireur"+graphisme){
                         game=false;
-                    } else if (celluleSuivante.className == "laser"){
-                        celluleSuivante.className = "boom";
+                    } else if (celluleSuivante.className == "laser"+graphisme){
+                        celluleSuivante.className = "boom"+graphisme;
                     } else {
-                        celluleSuivante.className = "alien";
+                        celluleSuivante.className = "alien"+graphisme;
                     }
                     cellule.className = "void";
                 }
@@ -153,7 +153,7 @@ function play(game,Droite,Gauche) {
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L" + i + "C" + j);
-                if (cellule.className == "alien"){
+                if (cellule.className == "alien"+graphisme){
                     if (i == 15){
                         game = false;
                     }
@@ -163,8 +163,6 @@ function play(game,Droite,Gauche) {
                 }
             }
         }
-        console.log(AlienNumber);
-        console.log(game);
         if (AlienNumber == 0){
             game = false;
         }
@@ -186,6 +184,8 @@ function play(game,Droite,Gauche) {
         }
     }, 1000)
 }
+let graphisme = 0;
+let choixGraphisme = 2;
 let tir = false;
 let grille = document.querySelector("div");
 let Body = document.querySelector("body");
@@ -200,7 +200,11 @@ start.style.height = "64px";
 document.querySelector("body").appendChild(start);
 /*Appuyer le bouton lance le jeu*/
 start.addEventListener("click", function(){
-    if (start.innerHTML == "Jouer"){
+    if (start.innerHTML == "Jouer" && choixGraphisme == 1){
+        graphisme = 1;
+        preparation();
+    } else if (start.innerHTML == "Jouer"){
+        graphisme = 2;
         preparation();
     } else {
         window.location.reload(false);
@@ -212,15 +216,15 @@ document.addEventListener("keydown", function(event){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L"+i+"C"+j)
-                if (cellule.className=="tireur"){
+                if (cellule.className=="tireur"+graphisme){
                     if (j-1 >= 0) {
                         let celluleSuivante = document.getElementById("L" + i + "C" + (j - 1));
-                        if (celluleSuivante.className == "alien"){
+                        if (celluleSuivante.className == "alien"+graphisme){
                             game = false;
                         } else {
-                            celluleSuivante.className = "tireur";
+                            celluleSuivante.className = "tireur"+graphisme;
                         }
-                        cellule.className = "void";
+                        cellule.className = "void"+graphisme;
                         break;
                     }
                 }
@@ -232,13 +236,13 @@ document.addEventListener("keydown", function(event){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L"+i+"C"+j)
-                if (cellule.className=="tireur"){
+                if (cellule.className=="tireur"+graphisme){
                     if (j+1 < 16) {
                         let celluleSuivante = document.getElementById("L" + i + "C" + (j + 1));
-                        if (celluleSuivante.className == "alien"){
+                        if (celluleSuivante.className == "alien"+graphisme){
                             game = false;
                         } else {
-                            celluleSuivante.className = "tireur";
+                            celluleSuivante.className = "tireur"+graphisme;
                         }
                         cellule.className = "void";
                         break;
@@ -252,13 +256,13 @@ document.addEventListener("keydown", function(event){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L"+i+"C"+j)
-                if (cellule.className=="tireur"){
+                if (cellule.className=="tireur"+graphisme){
                     if (i-1 > 11) {
                         let celluleSuivante = document.getElementById("L" + (i-1) + "C" + j);
-                        if (celluleSuivante.className == "alien"){
+                        if (celluleSuivante.className == "alien"+graphisme){
                             game = false;
                         } else {
-                            celluleSuivante.className = "tireur";
+                            celluleSuivante.className = "tireur"+graphisme;
                         }
                         cellule.className = "void";
                         break;
@@ -272,13 +276,13 @@ document.addEventListener("keydown", function(event){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L"+i+"C"+j)
-                if (cellule.className=="tireur"){
+                if (cellule.className=="tireur"+graphisme){
                     if (i+1 < 16) {
                         let celluleSuivante = document.getElementById("L" + (i+1) + "C" + j);
-                        if (celluleSuivante.className == "alien"){
+                        if (celluleSuivante.className == "alien"+graphisme){
                             game = false;
                         } else {
-                            celluleSuivante.className = "tireur";
+                            celluleSuivante.className = "tireur"+graphisme;
                         }
                         cellule.className = "void";
                         break;
@@ -292,17 +296,23 @@ document.addEventListener("keydown", function(event){
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
                 let cellule = document.getElementById("L"+i+"C"+j)
-                if (cellule.className=="tireur" && tir){
+                if (cellule.className=="tireur"+graphisme && tir){
                     let celluleSuivante = document.getElementById("L" + (i - 1) + "C" + j);
-                    if (celluleSuivante.className=="alien"){
-                        celluleSuivante.className = "boom";
+                    if (celluleSuivante.className=="alien"+graphisme){
+                        celluleSuivante.className = "boom"+graphisme;
                     } else {
-                        celluleSuivante.className = "laser";
+                        celluleSuivante.className = "laser"+graphisme;
                     }
                     tir = false;
                     break;
                 }
             }
         }
+    }
+    if (event.code == 'Digit1'){
+        choixGraphisme = 2;
+    }
+    if (event.code == 'Digit2'){
+        choixGraphisme = 1;
     }
 })
