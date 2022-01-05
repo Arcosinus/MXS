@@ -55,7 +55,7 @@ function play(game,Droite,Gauche) {
                     if (celluleSuivante.className == "alien"+graphisme){
                         celluleSuivante.className = "boom"+graphisme;
                     } else if (celluleSuivante.className == "void"){
-                        celluleSuivante.className = "laser+graphisme"
+                        celluleSuivante.className = "laser"+graphisme;
                     }
                     cellule.className = "void";
                 }
