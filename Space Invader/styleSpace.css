@@ -49,7 +49,7 @@ h3 {
     height: 21px;
 }
 .boom {
-    background-color: red;
+    background: no-repeat url(ressources/explosion.png);
     width: 26px;
     height: 21px;
 }
