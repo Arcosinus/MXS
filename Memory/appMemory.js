@@ -11,36 +11,51 @@ devoile.forEach(card => card.addEventListener('click', flipCard));
 function flipCard() {
     this.classList.toggle('face');
     if (!carteTourner) {
-        console.log('first')
         carteTourner = true;
         currCard = this;
-        carteChoix.push(currCard);
-        console.log('carte 1 ' + carteChoix);
-        return;
-    } else {
-    console.log('second')
-    carteTourner = false;
-    prevCard = this;
-    carteChoix.push(prevCard);
-    console.log('carte 2 ' + carteChoix);
-    return;
-    }
-    carteTourner = false;
-    if(carteChoix.length === 2){
-        if(carteChoix[0].dataset.attr === carteChoix[1].dataset.attr){
-            console.log('vrai');
-        }else {
-            console.log('faux');
+        carteChoix.push(this);
+        if (carteChoix.length === 2) {
+            setTimeout(() => {
+                if (carteChoix[0].innerHTML === carteChoix[1].innerHTML) {
+                    carteChoix[0].classList.add('match');
+                    carteChoix[1].classList.add('match');
+                    carteChoix = [];
+                } else {
+                    carteChoix[0].classList.remove('face');
+                    carteChoix[1].classList.remove('face');
+                    carteChoix = [];
+                }
+                carteTourner = false;
+            }, 1000);
         }
+    } else {
+        prevCard = this;
+        carteTourner = false;
+        setTimeout(() => {
+            prevCard.classList.remove('face');
+        }, 1000);
     }
+
+
 }
 
-//La carte se retourne au clic et dévoile au joueur le contenu de la carte. Celle-ci reste retournée.
-//Le choix de l’utilisateur est enregistré dans une variable.
-//Lorsque le joueur clic sur une seconde carte, celle-ci est comparée avec la précédente.
-//Si la seconde carte est la même que la précédente, elles restent retournées.
-//Si la seconde carte est différente de la première. Les deux cartes se retournent face caché.
 
 
 
 
+
+/*if (!carteTourner) {
+       console.log('first')
+       carteTourner = true;
+       currCard = this;
+       carteChoix.push(currCard);
+       console.log('carte 1 ' + carteChoix);
+       return;
+   } else {
+   console.log('second')
+   carteTourner = false;
+   prevCard = this;
+   carteChoix.push(prevCard);
+   console.log('carte 2 ' + carteChoix);
+   return;
+   }*/
