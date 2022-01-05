@@ -65,13 +65,11 @@ function flipCard() {
 function matchCarte() {
     //console.log(carteChoix.length);
     if (carteChoix[0].innerHTML === carteChoix[1].innerHTML) {
-        console.log('cest bon');
         carteChoix[0].removeEventListener('click', flipCard);
         carteChoix[1].removeEventListener('click', flipCard);
         carteChoix = [];
         carteTourner = false;
         carteBon++;
-        console.log(carteBon);
         if (carteBon === 6) {
             setTimeout( function(){ if (confirm('vous avez gagné en ' + tmp.innerHTML + ' !')){
             window.location.reload(false);
@@ -80,7 +78,6 @@ function matchCarte() {
         }, 500)
         }
     } else {
-        console.log('pas bon');
         carteChoix.forEach(card => card.classList.remove('face'));
         carteChoix = [];
         carteTourner = false;
