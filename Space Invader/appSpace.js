@@ -5,7 +5,6 @@ function preparation(){
     score.innerHTML = 'Score : <embed src="fond.mp3" hidden=true autostart=true loop=true mastersound>'
     let game = true;
     /*Reset de la grille*/
-    let grille = document.querySelector("div");
     grille.innerHTML = '';
     /*Création et ajout d'un tableau contenant les ennemis et le joueur*/
     let table = document.createElement("table");
@@ -56,6 +55,9 @@ function play(game,Droite,Gauche) {
                 }
             }
         }
+        if (AlienNumber == 0){
+            game = false;
+        }
         /*Déplacement des lasers et gestion des collisions avec les ennemis et le joueur*/
         for (let i = 0; i < 16; i++) {
             for (let j = 0; j < 16; j++) {
@@ -89,6 +91,9 @@ function play(game,Droite,Gauche) {
                         if (celluleSuivante.className == "tireur") {
                             game = false;
                         }
+                        if (celluleSuivante.className == "laser"){
+                            celluleSuivante.className = "boom";
+                        }
                         celluleSuivante.className = "alien";
                         cellule.className = "void";
                     }
@@ -104,6 +109,9 @@ function play(game,Droite,Gauche) {
                     if (j-1 != -1) {
                         if (celluleSuivante.className == "tireur") {
                             game = false;
+                        }
+                        if (celluleSuivante.className == "laser"){
+                            celluleSuivante.className = "boom";
                         }
                         celluleSuivante.className = "alien";
                         cellule.className = "void";
@@ -121,6 +129,9 @@ function play(game,Droite,Gauche) {
                 if (cellule.className == "alien") {
                     if (celluleSuivante.className == "tireur"){
                         game=false;
+                    }
+                    if (celluleSuivante.className == "laser"){
+                        celluleSuivante.className = "boom";
                     }
                     celluleSuivante.className = "alien";
                     cellule.className = "void";
@@ -140,6 +151,9 @@ function play(game,Droite,Gauche) {
                     if (celluleSuivante.className == "tireur"){
                         game=false;
                     }
+                    if (celluleSuivante.className == "laser"){
+                        celluleSuivante.className = "boom";
+                    }
                     celluleSuivante.className = "alien";
                     cellule.className = "void";
                 }
@@ -148,6 +162,7 @@ function play(game,Droite,Gauche) {
     }
         /*Fin du jeu par mort du joueur*/
         if (!game){
+            grille.innerHTML = "";
             let score = document.querySelector("h3");
             score.innerHTML = 'Vous avez perdu !'
             /*Fin du jeu par victoire du jeu, en lien avec le code pour vérifier le nombre d'ennemis ligne 40*/
@@ -162,10 +177,17 @@ function play(game,Droite,Gauche) {
     }, 1000)
 }
 let tir = false;
+let grille = document.querySelector("div");
+let Body = document.querySelector("body");
+Body.style.display = "flex";
+Body.style.alignItems = "center";
+Body.style.flexDirection = "column";
 /*Ajout d'un bouton pour lancer le jeu et d'un input*/
 let start = document.createElement("button");
 let input = document.createElement("input");
 start.innerHTML = "Jouer";
+start.style.width = "64px";
+input.style.width = "64px";
 document.querySelector("body").appendChild(start);
 document.querySelector("body").appendChild(input);
 /*Appuyer le bouton lance le jeu*/
