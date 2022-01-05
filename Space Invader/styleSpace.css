@@ -28,7 +28,7 @@ h3 {
     height: 25px;
 }
 .tireur {
-    background: no-repeat url(ressources/vaisseau.png);
+    background: no-repeat url(ressources/vaisseau_1.png);
     transform: rotate(180deg);
     background-position: center;
     background-size: contain;
@@ -36,14 +36,13 @@ h3 {
     height: 21px;
 }
 .alien {
-    background: no-repeat url(ressources/ennemies.png);
+    background: no-repeat url(ressources/ennemies_1.png);
     background-position: center;
     background-size: contain;
     width: 26px;
     height: 21px;
 }
 .void {
-    background: no-repeat url(ressources/background-black.png);
     background-position: center;
     background-size: contain;
     width: 26px;
@@ -51,11 +50,19 @@ h3 {
 }
 .boom {
     background-color: red;
+    width: 26px;
+    height: 21px;
 }
 .laser {
-    background-color: orange;
+    background: no-repeat url(ressources/laser.png);
+    /*background-color: orange;*/
+    width: 26px;
+    height: 21px;
+    transform: rotate(90deg);
+    background-position-y: 5px;
 }
 
 td {
-    border: #DDDD17 solid;
+    border: rgba(17, 17, 17, 0) solid;
+    /*border: blue solid;*/
 }
