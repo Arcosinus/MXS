@@ -17,8 +17,7 @@ function flipCard() {
         carteChoix.push(currCard);
         console.log('carte 1 ' + carteChoix);
         return;
-    }
-    else {
+    } else {
     console.log('second')
     carteTourner = false;
     prevCard = this;
