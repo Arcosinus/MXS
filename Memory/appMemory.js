@@ -39,24 +39,28 @@ let prevCard;
 let carteChoix = [];
 let carteBon = [];
 
-devoile.forEach(card => card.addEventListener('click', flipCard));
-
-function flipCard() {
-    this.classList.toggle('face');
-        carteTourner = true;
-        currCard = this;
-
-        if (carteChoix.length === 0) {
-
-            carteChoix.push(this);
-        } else if (carteChoix.length === 1) {
-
-            carteChoix.push(this);
-            setTimeout(matchCarte, 500);
-        }
-
+randomCarte();
+function randomCarte() {
+    allCarte.forEach(rand=>{
+        const cartes = [...Array(allCarte.length).keys()];
+        const randomFonct = Math.floor(Math.random() * allCarte.length);
+        rand.style.order= cartes[randomFonct];
+    })
 }
 
+devoile.forEach(card => card.addEventListener('click', flipCard));
+function flipCard() {
+    this.classList.toggle('face');
+    carteTourner = true;
+    currCard = this;
+    if (carteChoix.length === 0) {
+        carteChoix.push(this);
+    } else if (carteChoix.length === 1) {
+
+        carteChoix.push(this);
+        setTimeout(matchCarte, 500);
+    }
+}
 
 function matchCarte() {
     //console.log(carteChoix.length);
@@ -70,19 +74,16 @@ function matchCarte() {
         console.log(carteBon);
         if (carteBon === 6) {
             setTimeout( function(){ if (confirm('vous avez gagné en ' + tmp.innerHTML + ' !')){
-                window.location.reload(false);
-            } else {
-            }}, 500)
-
-
-
+            window.location.reload(false);
+        } else {
+        }
+        }, 500)
         }
     } else {
         console.log('pas bon');
         carteChoix.forEach(card => card.classList.remove('face'));
         carteChoix = [];
         carteTourner = false;
-
     }
 }
 
