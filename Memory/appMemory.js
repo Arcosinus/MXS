@@ -1,16 +1,16 @@
 const allCarte = document.querySelectorAll('.carte');
 const devoile = document.querySelectorAll('.double-face');
+const grille = document.querySelector('.grille');
 
 const divTimer = document.createElement("div");
 divTimer.className = "temps";
 divTimer.style.cssText = 'text-align:center';
-divTimer.innerHTML ='<h1>00 min:00 sec</h1>';
+divTimer.innerHTML ='<h1>00 min :00 sec</h1>';
 document.body.insertBefore(divTimer, document.body.secondChild);
 const temps = document.querySelector('h1');
 
-let minutes = 0o0;
-let secondes = 0o0;
-let secondZero = 0;
+let minutes = 0;
+let secondes = 0;
 let carteTourner = false;
 let currCard;
 let carteChoix = [];
@@ -19,18 +19,15 @@ let validTimer = true;
 
 function timer(){
     secondes ++;
-    if(secondes === 59){
-        secondes = 0o0;
-        minutes = minutes + 1;
+    if(secondes === 60){
+        minutes++;
+        secondes = 0;
     }
-    if(secondes === 10){
-        secondZero = '';
+    if(secondes < 10){
+        temps.innerHTML= '0' + minutes + ' min ' + ':0' + secondes + ' sec';
     }else{
-        if(secondes === 0o0){
-            secondZero = '';
-        }
+        temps.innerHTML = '0' + minutes + ' min ' + ':' + secondes + ' sec';
     }
-    temps.innerText = minutes + ' min' + ':' + secondZero + secondes + ' sec';
 }
 
 /*Fonction qui mélange la position des cartes en ordre aléatoire*/
@@ -63,6 +60,7 @@ function flipCard() {
         setTimeout(matchCarte, 500);
     }
 }
+
 /*Fonction qui compare la première carte et la seconde carte sélectionnée qui sont stockée dans un tableau*/
 function matchCarte() {
     /*Si la première carte est égale à la seconde carte, les deux cartes restent en tourné face, sinon elles restent cachées*/
@@ -76,11 +74,11 @@ function matchCarte() {
         if (carteBon === 6) {
         setTimeout( function(){
             if (confirm('vous avez gagné en ' + temps.innerHTML + ' !')){
-            window.location.reload(false);
-            } else {
+                window.location.reload(false);
             }
         }, 500)
         }
+
     } else {
         carteChoix.forEach(card => card.classList.remove('face'));
         carteChoix = [];
