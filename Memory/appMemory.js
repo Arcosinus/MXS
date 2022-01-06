@@ -4,7 +4,7 @@ const devoile = document.querySelectorAll('.double-face');
 const divTimer = document.createElement("div");
 divTimer.className = "temps";
 divTimer.style.cssText = 'text-align:center';
-divTimer.innerHTML ='<h1>00 min :00 sec</h1>';
+divTimer.innerHTML ='<h1>00 min:00 sec</h1>';
 document.body.insertBefore(divTimer, document.body.secondChild);
 const temps = document.querySelector('h1');
 
