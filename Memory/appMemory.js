@@ -35,6 +35,7 @@ let currCard;
 let prevCard;
 let carteChoix = [];
 let carteBon = [];
+let validTimer = true;
 
 devoile.forEach(card => card.addEventListener('click', flipCard));
 function flipCard() {
