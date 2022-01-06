@@ -1,8 +1,8 @@
-                    MXS - Project JavaScript : 
+     MXS - Project JavaScript :
 
-                    . Space Invader Project
-                    . Memory Card Project
+    . Space Invader Project
+    . Memory Card Project
 
-                By David, Antoine, Lucas, Kevin.
+    By David, Antoine, Lucas, Kevin.
 
 
