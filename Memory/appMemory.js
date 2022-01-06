@@ -14,9 +14,6 @@ const tmp = document.querySelector('h1');
 let min = 0o0;
 let seconds = 0o0;
 let splice = 0;
-let counter = setInterval(function(){
-    timer();
-},1000);
 function timer(){
     seconds++;
     if(seconds===59){
@@ -42,7 +39,15 @@ let carteBon = [];
 devoile.forEach(card => card.addEventListener('click', flipCard));
 function flipCard() {
     this.classList.toggle('face');
-        carteTourner = true;
+    /*démarre le timer quand l'utilisateur touche une carte*/
+    if (validTimer === true){
+        let counter = setInterval(function(){
+            timer();
+        },1000);
+        validTimer = false;
+    }
+
+    carteTourner = true;
         currCard = this;
 
         if (carteChoix.length === 0) {
