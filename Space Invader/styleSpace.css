@@ -73,18 +73,54 @@ h3 {
     width: 26px;
     height: 21px;
 }
-.laser1 {
+.laser11 {
     background: no-repeat url(ressources/laser.png);
     width: 26px;
     height: 21px;
     transform: rotate(90deg);
     background-position-y: 5px;
 }
-.laser2 {
+.laser12 {
+    background: no-repeat url(ressources/laser.png);
+    width: 26px;
+    height: 21px;
+    transform: rotate(90deg);
+    background-position-y: 5px;
+    filter: hue-rotate(-25deg);
+}
+.laser13 {
+    background: no-repeat url(ressources/laser.png);
+    width: 26px;
+    height: 21px;
+    transform: rotate(90deg);
+    background-position-y: 5px;
+    filter: hue-rotate(-50deg);
+}
+.laser21 {
     background-color: orange;
     width: 26px;
     height: 21px;
-    background-position-y: 5px;
+}
+.laser22 {
+    background-color: orangered;
+    width: 26px;
+    height: 21px;
+}
+.laser23 {
+    background-color: red;
+    width: 26px;
+    height: 21px;
+}
+.bonus1 {
+    background: no-repeat url(ressources/power_up.png);
+    width: 26px;
+    height: 21px;
+    filter: hue-rotate(-50deg);
+}
+.bonus2 {
+    background-color: yellow;
+    width: 26px;
+    height: 21px;
 }
 
 td {
