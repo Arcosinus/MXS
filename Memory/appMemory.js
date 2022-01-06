@@ -2,12 +2,58 @@ const allCarte = document.querySelectorAll('.carte');
 const devoile = document.querySelectorAll('.double-face');
 const grille = document.querySelector('.grille');
 
+document.body.style.userSelect = "none";
+
 const divTimer = document.createElement("div");
 divTimer.className = "temps";
 divTimer.style.cssText = 'text-align:center';
 divTimer.innerHTML ='<h1>00 min :00 sec</h1>';
 document.body.insertBefore(divTimer, document.body.secondChild);
 const temps = document.querySelector('h1');
+
+const divStart = document.createElement("div");
+divStart.className = "start";
+divStart.style.cssText = 'flex:auto ';
+document.body.insertBefore(divStart, document.body.firstChild);
+
+const btnStart = document.createElement("button");
+btnStart.className = "buttonStart";
+btnStart.innerHTML = `Start`;
+divStart.appendChild(btnStart);
+
+const btnRestart = document.createElement("button");
+btnRestart.className = "buttonRestart";
+btnRestart.style.cssText = 'display:none';
+btnRestart.innerHTML = `Restart`;
+divStart.appendChild(btnRestart);
+
+let clickStart = document.querySelector('.buttonStart');
+let clickRestart = document.querySelector('.buttonRestart');
+let divClique = document.querySelector('.start');
+
+window.onload = function() {
+    setTimeout( function(){
+        grille.style.display = 'none';
+        temps.style.display = 'none';
+        clickStart.addEventListener('click', startClique);
+        clickRestart.addEventListener('click', restartClique);
+    }, 250)
+}
+
+function startClique(){
+    grille.style.display = '';
+    temps.style.display = '';
+    clickRestart.style.display = '';
+    clickStart.style.display = 'none';
+}
+
+function restartClique(){
+    grille.style.display = '';
+    temps.style.display = '';
+    clickStart.style.display = '';
+    clickRestart.style.display = 'none';
+    window.location.reload(false);
+}
 
 let minutes = 0;
 let secondes = 0;
@@ -33,10 +79,10 @@ function timer(){
 /*Fonction qui mélange la position des cartes en ordre aléatoire*/
 randomCarte();
 function randomCarte() {
-    allCarte.forEach(rand=>{
+    allCarte.forEach(randomCarte=>{
         const cartes = [...Array(allCarte.length).keys()];
         const randomFonct = Math.floor(Math.random() * allCarte.length);
-        rand.style.order= cartes[randomFonct];
+        randomCarte.style.order= cartes[randomFonct];
     })
 }
 
