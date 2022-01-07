@@ -5,54 +5,49 @@ const faceAvant = document.querySelectorAll('.face');
 const faceArriere = document.querySelectorAll('.arriere');
 
 document.body.style.userSelect = "none";
-
-const divTimer = document.createElement("div");
-divTimer.className = "bottom";
-divTimer.style.cssText = 'background-color: rgba(255,255,255,0.25);border-radius:10px;margin:7px;margin-top:27px;color: white;height:43px;text-align: center;';
-divTimer.innerHTML =`<span class=moves>Moves :0</span>
-<span class=lvlPlayer>Your level: NOICE</span>
-<span class=bonusTmp>Bonus Temps: 0 secondes</span>
-<span class=times>00 min :00 sec</span>`;
-document.body.insertBefore(divTimer, document.body.secondChild);
+/*Création noeud parent div pour afficher les règles de jeu*/
+const divBonus = document.createElement("div");
+divBonus.className = "divBonus";
+divBonus.style.cssText = 'font-weight:bold;font-family:Andale Mono; background-color: rgba(255,255,255,0.25);border-radius:20px;margin:7px;margin-top:27px;color: white;height:42px;text-align: center;';
+divBonus.innerHTML =`<span class=moves>Total mouvement: 0</span>
+<span class=lvlPlayer>Ton niveau: AVANCÉ</span>
+<span class=times>00 min :00 sec</span>
+<span class=bonusTmp>Temps gagné à chaque bonne réponse: 0 secondes</span>`;
+document.body.insertBefore(divBonus, document.body.secondChild);
 const temps = document.querySelector('.times');
 const moves = document.querySelector('.moves');
 const bonusTemps = document.querySelector('.bonusTmp');
 const playerLvl = document.querySelector('.lvlPlayer');
-moves.style.cssText ='position: absolute;left: 20px;font-size: 16px;top:8.5px;';
-playerLvl.style.cssText ='position: absolute;left: 20px;font-size: 12px;top:25px;';
-temps.style.cssText = 'font-size: 22px;padding-top:10px;display:block;';
-bonusTemps.style.cssText = 'position: absolute;right: 20px;font-size: 16px;top: 8.5px;';
-
-const divTop2 = document.createElement("div");
-divTop2.className = "top2";
-divTop2.style.cssText = 'border-radius:10px;margin:7px;margin-top:0px;margin-bottom:-87px;color: white;height:56px;text-align: center;';
-document.body.insertBefore(divTop2, document.body.firstChild);
-
+moves.style.cssText ='position: absolute;right: 20px;font-size: 12px;top:25px;';
+playerLvl.style.cssText ='position: absolute;left: 20px;font-size: 16px;top:12px;';
+temps.style.cssText = 'position: absolute;right: 20px;font-size: 16px;top: 5px;';;
+bonusTemps.style.cssText = 'font-size: 17px;padding-top:12px;display:block;';
+/*Création noeud parent div pour bouton Start et bouton Restart*/
+const divBouton = document.createElement("div");
+divBouton.className = "divBouton";
+divBouton.style.cssText = 'margin:7px;margin-top:0px;margin-bottom:-87px;color: white;height:56px;text-align: center;';
+document.body.insertBefore(divBouton, document.body.firstChild);
 const btnStart = document.createElement("button");
 btnStart.className = "buttonStart";
 btnStart.innerHTML = `START GAME`;
-btnStart.style.cssText = 'background-color:rgba(255,255,255,0.2);border:none;border-radius:7px;font-size:15px;cursor:pointer;padding:7px ';
-divTop2.appendChild(btnStart);
-
+btnStart.style.cssText = 'font-weight:bold;font-family:Andale Mono, monospace;background-color:rgba(255,255,255,0.2);border:none;border-radius:20px;font-size:15px;cursor:pointer;padding:7px';
+divBouton.appendChild(btnStart);
 const btnRestart = document.createElement("button");
 btnRestart.className = "buttonRestart";
 btnRestart.innerHTML = `RESTART GAME`;
-btnRestart.style.cssText = 'background-color:rgba(255,255,255,0.2);border:none;border-radius:7px;font-size:15px;display:none;cursor:pointer;padding:7px';
-divTop2.appendChild(btnRestart);
-
-const divTop = document.createElement("div");
-divTop.className = "top";
-divTop.style.cssText = 'background-color: rgba(255,255,255,0.25);border-radius:10px;margin:7px;margin-top:0px;color: white;height:42px;text-align: center;'
-document.body.insertBefore(divTop, divTop2);
-
-const divTitre = document.createElement("span");
-divTitre.className = "titre";
-divTitre.innerHTML = `MEMORY GAME`;
-divTitre.style.cssText = 'font-size:17px;padding-top:10px;display:block;';
-divTop.appendChild(divTitre);
+btnRestart.style.cssText = 'font-weight:bold;font-family:Andale Mono, monospace;background-color:rgba(255,255,255,0.2);border:none;border-radius:20px;font-size:15px;display:none;cursor:pointer;padding:7px';
+divBouton.appendChild(btnRestart);
+/*Création noeud parent div pour Titre du jeu*/
+const divTitre = document.createElement("div");
+divTitre.className = "divTitre";
+divTitre.style.cssText = 'background-color: rgba(255,255,255,0.25);border-radius:20px;margin:7px;margin-top:0px;color: white;height:42px;text-align: center;'
+document.body.insertBefore(divTitre, divBouton);
+const spanTitre = document.createElement("span");
+spanTitre.className = "titre";
+spanTitre.innerHTML = `MEMORY GAME`;
+spanTitre.style.cssText = 'font-family:Andale Mono, monospace; font-size:x-large;padding-top:10px;display:block;';
+divTitre.appendChild(spanTitre);
 const titre = document.querySelector('.titre');
-titre.style.fontSize = "x-large";
-titre.style.fontFamily = "Impact,sans-serif";
 
 const clickStart = document.querySelector('.buttonStart');
 const clickRestart = document.querySelector('.buttonRestart');
@@ -66,12 +61,15 @@ faceAvant.forEach(avant=>{
 faceArriere.forEach(arriere=>{
     arriere.style.cssText= 'background-color:rgba(255,255,255,0.2);border:none;border-radius:13px;';
 })
-grille.style.cssText = 'background-color:rgba(255,255,255,0.2);border:none;border-radius:13px;';
-
+grille.style.cssText = 'background-color:rgba(255,255,255,0.2);border:none;border-radius:17px;';
+/*Lancement du jeu quand on clique sur le bouton Start et le remplace par bouton Restart qui recharge la page pour revenir au début du jeu*/
 window.onload = function() {
     setTimeout( function(){
         grille.style.display = 'none';
         temps.style.display = 'none';
+        playerLvl.style.display = 'none';
+        moves.style.display = 'none';
+        bonusTemps.style.display = 'none';
         clickStart.addEventListener('click', startClique);
         clickRestart.addEventListener('click', restartClique);
     }, 250)
@@ -79,12 +77,18 @@ window.onload = function() {
 function startClique(){
     grille.style.display = 'grid';
     temps.style.display = 'grid';
+    playerLvl.style.display = '';
+    moves.style.display = '';
+    bonusTemps.style.display = 'block';
     clickRestart.style.display = '';
     clickStart.style.display = 'none';
 }
 function restartClique(){
     grille.style.display = 'grid';
     temps.style.display = 'grid';
+    playerLvl.style.display = '';
+    moves.style.display = '';
+    bonusTemps.style.display = 'block';
     clickRestart.style.display = 'none';
     window.location.reload(true);
 }
@@ -122,12 +126,9 @@ function randomCarte() {
 }
 
 devoile.forEach(card => card.addEventListener('click', flipCard));
-// card.addEventListener('mouseenter',  ()=>console.log('enter') ,card.style.cssText = "transform:rotate(7deg)");
-// card.addEventListener('mouseleave',  ()=>console.log('leave') ,card.style.cssText = "transform:scale(0.90)");
 /*Fonction qui retourne les cartes sélectionnées et les stocke dans un tableau*/
 function flipCard() {
     moves.innerHTML = 'Moves :'+ moveCount ;
-    grille.style.cssText= 'background-color:rgba(255,255,255,0.2);';
     this.classList.toggle('face');
     /*Démarre le timer quand l'utilisateur touche une carte*/
     if (validTimer === true){
@@ -147,13 +148,13 @@ function flipCard() {
         console.log(moveCount)
     }
     if(moveCount === 12){
-        playerLvl.innerHTML = 'Your level: MOYEN';
+        playerLvl.innerHTML = 'Ton niveau: INTERMÉDIAIRE';
     }
     if(moveCount === 24){
-        playerLvl.innerHTML = 'Your level: BAD...';
+        playerLvl.innerHTML = 'Ton niveau: NOVICE...';
     }
-    moves.innerHTML = 'Moves :'+ moveCount ;
-    bonusTemps.innerHTML = 'Bonus Temps: '+bonusSecondes+' secondes';
+    moves.innerHTML = 'Total mouvement: '+ moveCount ;
+    bonusTemps.innerHTML = 'Temps gagné à chaque bonne réponse: '+bonusSecondes+' secondes';
 }
 /*Fonction qui compare la première carte et la seconde carte sélectionnée qui sont stockée dans un tableau*/
 function matchCarte() {
@@ -170,7 +171,7 @@ function matchCarte() {
         if (carteBon === 6) {
         grille.style.cssText= 'background-color: rgba(8, 226, 55, 0.2);';
         setTimeout( function(){
-            if (confirm(playerLvl.innerHTML +'\nvous avez gagné en ' + temps.innerHTML + ' !\nTotal Move : '+moves.innerHTML+'\n'+bonusTemps.innerHTML)=== true){
+            if (confirm(playerLvl.innerHTML +'\nvous avez gagné en ' + temps.innerHTML + ' !\n'+moves.innerHTML+'\n'+bonusTemps.innerHTML)=== true){
                 window.location.reload();
             }
         }, 500)
