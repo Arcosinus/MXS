@@ -8,21 +8,24 @@ document.body.style.userSelect = "none";
 
 const divTimer = document.createElement("div");
 divTimer.className = "bottom";
-divTimer.style.cssText = 'background-color: rgba(255,255,255,0.25);border-radius:10px;margin:7px;margin-top:20px;color: white;height:56px;text-align: center;'
+divTimer.style.cssText = 'background-color: rgba(255,255,255,0.25);border-radius:10px;margin:7px;margin-top:27px;color: white;height:43px;text-align: center;';
 divTimer.innerHTML =`<span class=moves>Moves :0</span>
+<span class=lvlPlayer>Your level: NOICE</span>
 <span class=bonusTmp>Bonus Temps: 0 secondes</span>
 <span class=times>00 min :00 sec</span>`;
 document.body.insertBefore(divTimer, document.body.secondChild);
 const temps = document.querySelector('.times');
 const moves = document.querySelector('.moves');
 const bonusTemps = document.querySelector('.bonusTmp');
+const playerLvl = document.querySelector('.lvlPlayer');
 moves.style.cssText ='position: absolute;left: 20px;font-size: 16px;top:8.5px;';
+playerLvl.style.cssText ='position: absolute;left: 20px;font-size: 12px;top:25px;';
 temps.style.cssText = 'font-size: 22px;padding-top:10px;display:block;';
 bonusTemps.style.cssText = 'position: absolute;right: 20px;font-size: 16px;top: 8.5px;';
 
 const divTop2 = document.createElement("div");
 divTop2.className = "top2";
-divTop2.style.cssText = 'border-radius:10px;margin:7px;margin-top:0px;margin-bottom:-87px;color: white;height:56px;text-align: center;'
+divTop2.style.cssText = 'border-radius:10px;margin:7px;margin-top:0px;margin-bottom:-87px;color: white;height:56px;text-align: center;';
 document.body.insertBefore(divTop2, document.body.firstChild);
 
 const btnStart = document.createElement("button");
@@ -39,14 +42,17 @@ divTop2.appendChild(btnRestart);
 
 const divTop = document.createElement("div");
 divTop.className = "top";
-divTop.style.cssText = 'background-color: rgba(255,255,255,0.25);border-radius:10px;margin:7px;margin-top:0px;color: white;height:43px;text-align: center;'
+divTop.style.cssText = 'background-color: rgba(255,255,255,0.25);border-radius:10px;margin:7px;margin-top:0px;color: white;height:42px;text-align: center;'
 document.body.insertBefore(divTop, divTop2);
 
-const titre = document.createElement("span");
-titre.className = "titre";
-titre.innerHTML = `MEMORY GAME`;
-titre.style.cssText = 'font-size:17px;padding-top:10px;display:block;';
-divTop.appendChild(titre);
+const divTitre = document.createElement("span");
+divTitre.className = "titre";
+divTitre.innerHTML = `MEMORY GAME`;
+divTitre.style.cssText = 'font-size:17px;padding-top:10px;display:block;';
+divTop.appendChild(divTitre);
+const titre = document.querySelector('.titre');
+titre.style.fontSize = "x-large";
+titre.style.fontFamily = "Impact,sans-serif";
 
 const clickStart = document.querySelector('.buttonStart');
 const clickRestart = document.querySelector('.buttonRestart');
@@ -115,11 +121,9 @@ function randomCarte() {
     })
 }
 
-// devoile.forEach(entrer => entrer.addEventListener('mouseenter',  ()=>devoile.style.transform = "rotate(7deg)"));
-// devoile.forEach(leavee => leavee.addEventListener('mouseleave',  ()=>devoile.style.transform = "scale(0.90)"));
-
-
 devoile.forEach(card => card.addEventListener('click', flipCard));
+// card.addEventListener('mouseenter',  ()=>console.log('enter') ,card.style.cssText = "transform:rotate(7deg)");
+// card.addEventListener('mouseleave',  ()=>console.log('leave') ,card.style.cssText = "transform:scale(0.90)");
 /*Fonction qui retourne les cartes sélectionnées et les stocke dans un tableau*/
 function flipCard() {
     moves.innerHTML = 'Moves :'+ moveCount ;
@@ -142,6 +146,12 @@ function flipCard() {
         moveCount++;
         console.log(moveCount)
     }
+    if(moveCount === 12){
+        playerLvl.innerHTML = 'Your level: MOYEN';
+    }
+    if(moveCount === 24){
+        playerLvl.innerHTML = 'Your level: BAD...';
+    }
     moves.innerHTML = 'Moves :'+ moveCount ;
     bonusTemps.innerHTML = 'Bonus Temps: '+bonusSecondes+' secondes';
 }
@@ -156,16 +166,11 @@ function matchCarte() {
         carteBon++;
         secondes--;
         bonusSecondes++;
-        if(secondes < 10){
-            temps.innerHTML= '0' + minutes + ' min ' + ':0' + secondes + ' sec';
-        }else{
-            temps.innerHTML = '0' + minutes + ' min ' + ':' + secondes + ' sec';
-        }
         /*Si toutes les cartes sont tournées face, la page indique la fin du jeu et la page se recharge*/
         if (carteBon === 6) {
         grille.style.cssText= 'background-color: rgba(8, 226, 55, 0.2);';
         setTimeout( function(){
-            if (confirm('vous avez gagné en ' + temps.innerHTML + ' ! (Total Move : '+moves.innerHTML+' avec Bonus Temps:'+bonusTemps.innerHTML+')')){
+            if (confirm(playerLvl.innerHTML +'\nvous avez gagné en ' + temps.innerHTML + ' !\nTotal Move : '+moves.innerHTML+'\n'+bonusTemps.innerHTML)=== true){
                 window.location.reload();
             }
         }, 500)
@@ -175,5 +180,10 @@ function matchCarte() {
         carteChoix.forEach(card => card.classList.remove('face'));
         carteChoix = [];
         carteTourner = false;
+    }
+    if(secondes < 10){
+        temps.innerHTML= '0' + minutes + ' min ' + ':0' + secondes + ' sec';
+    }else{
+        temps.innerHTML = '0' + minutes + ' min ' + ':' + secondes + ' sec';
     }
 }
