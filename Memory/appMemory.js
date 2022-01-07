@@ -12,7 +12,7 @@ divBonus.style.cssText = 'font-weight:bold;font-family:Andale Mono; background-c
 divBonus.innerHTML =`<span class=moves>Total mouvement: 0</span>
 <span class=lvlPlayer>Ton niveau: AVANCÉ</span>
 <span class=times>00 min :00 sec</span>
-<span class=bonusTmp>Temps gagné à chaque bonne réponse: 0 secondes</span>`;
+<span class=bonusTmp>Temps gagné à chaque bonne pioche: 0 secondes</span>`;
 document.body.insertBefore(divBonus, document.body.secondChild);
 const temps = document.querySelector('.times');
 const moves = document.querySelector('.moves');
@@ -92,7 +92,6 @@ function restartClique(){
     clickRestart.style.display = 'none';
     window.location.reload(true);
 }
-
 let bonusSecondes = 0;
 let moveCount = 0;
 let minutes = 0;
@@ -102,7 +101,6 @@ let currCard;
 let carteChoix = [];
 let carteBon = [];
 let validTimer = true;
-
 function timer(){
     secondes ++;
     if(secondes === 60){
@@ -124,7 +122,6 @@ function randomCarte() {
         randomCarte.style.order= cartes[randomFonct];
     })
 }
-
 devoile.forEach(card => card.addEventListener('click', flipCard));
 /*Fonction qui retourne les cartes sélectionnées et les stocke dans un tableau*/
 function flipCard() {
@@ -154,7 +151,7 @@ function flipCard() {
         playerLvl.innerHTML = 'Ton niveau: NOVICE...';
     }
     moves.innerHTML = 'Total mouvement: '+ moveCount ;
-    bonusTemps.innerHTML = 'Temps gagné à chaque bonne réponse: '+bonusSecondes+' secondes';
+    bonusTemps.innerHTML = 'Temps gagné à chaque bonne pioche: '+bonusSecondes+' secondes';
 }
 /*Fonction qui compare la première carte et la seconde carte sélectionnée qui sont stockée dans un tableau*/
 function matchCarte() {
